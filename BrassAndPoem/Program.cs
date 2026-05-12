@@ -96,7 +96,7 @@ Console.WriteLine(greeting);
 string choice = null;
 while (choice != "5")
 {
-    DisplayMenu(products, productTypes);
+    DisplayMenu();
     choice = Console.ReadLine().Trim();
 
     if (string.IsNullOrEmpty(choice)) continue;
@@ -127,7 +127,7 @@ while (choice != "5")
 
 
 // functions
-void DisplayMenu(List<Product> products, List<ProductType> productTypes)
+void DisplayMenu()
 {
     Console.WriteLine(@"
 1. Display all products
