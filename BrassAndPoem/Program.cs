@@ -86,6 +86,7 @@ List<ProductType> productTypes = new List<ProductType>()
     Title = "Poems"  
   }
 };
+
 //put your greeting here
 
 string greeting = @"Welcome to Brass & Poem!";
@@ -112,12 +113,10 @@ while (choice != "5")
     {
         AddProduct(products, productTypes);
     }
-    /* 
     else if (choice == "4")
     {
         UpdateProduct(products, productTypes);
     }
-    */
     else if (choice == "5")
     {
         Console.WriteLine("Bye bye!");
@@ -155,7 +154,7 @@ void DisplayAllProducts(List<Product> products, List<ProductType> productTypes)
                 matchType = type;
             }
         }
-        Console.WriteLine($"{i + 1}. {products[i].Name} costs ${products[i].Price} and is in the category for 5{matchType.Title}");
+        Console.WriteLine($"{i + 1}. {products[i].Name} costs ${products[i].Price} and is in the category for {matchType.Title}");
     }
     //throw new NotImplementedException();
 }
@@ -180,16 +179,65 @@ void AddProduct(List<Product> products, List<ProductType> productTypes)
 
     Console.WriteLine("Enter the name of a product to add: ");
     string name = Console.ReadLine().Trim();
+
+    Console.WriteLine("Enter the price of the product to add: "); 
+    decimal price = decimal.Parse(Console.ReadLine().Trim());
+
+    for (int i = 0; i < productTypes.Count; i++)
+    {
+        Console.WriteLine($"{i + 1}. {productTypes[i].Title}");
+    }
+
+    Console.WriteLine("Choose what type of product to add: ");
+    int pickType = int.Parse(Console.ReadLine().Trim());
+
+    products.Add
+    (
+    new Product()
+    {
+        Name = name,
+        Price = price,
+        ProductTypeId = productTypes[pickType - 1].Id 
+    }
+    );
+
+    Console.WriteLine($"{name} added to product list!");
     //throw new NotImplementedException();
 }
 
-/*
-
 void UpdateProduct(List<Product> products, List<ProductType> productTypes)
 {
-    throw new NotImplementedException();
+    DisplayAllProducts(products, productTypes);
+
+    Console.WriteLine("Enter the number of the product to update: ");
+    int choice = int.Parse(Console.ReadLine().Trim());
+    Product updateThis = products[choice - 1];
+
+    Console.WriteLine($"Current name: {updateThis.Name}. New name: ");
+    string newName = Console.ReadLine().Trim();
+
+    if (!string.IsNullOrEmpty(newName)) updateThis.Name = newName;
+
+    Console.WriteLine($"Current price: {updateThis.Price}. New price: ");
+    string newPrice = Console.ReadLine().Trim();
+
+    if (!string.IsNullOrEmpty(newPrice)) updateThis.Price = decimal.Parse(newPrice);
+
+    for (int i = 0; i < productTypes.Count; i++)
+    {
+        Console.WriteLine($"{i + 1}. {productTypes[i].Title}");
+    }
+    Console.WriteLine($"Current type: {updateThis.ProductTypeId}. New type number: ");
+    string newType = Console.ReadLine().Trim();
+    if (!string.IsNullOrEmpty(newType)) updateThis.ProductTypeId = productTypes[int.Parse(newType) - 1].Id;
+
+    Console.WriteLine($"{updateThis.Name} has been updated!");
+
+    //throw new NotImplementedException();
 }
-*/
+
+
+
 
 // don't move or change this!
 public partial class Program { }
